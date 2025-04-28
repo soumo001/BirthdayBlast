@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 252 80% 12%;
+  --foreground: 0 0% 98%;
+  --muted: 255 10% 20%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 330 100% 70%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 273 83% 55%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 225 100% 65%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+
+  .dancing-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .message-card {
+    @apply backdrop-blur-md;
+  }
+
+  .hidden-section {
+    @apply opacity-0 translate-y-5 transition-all duration-700 ease-out;
+  }
+
+  .visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Firework animation */
+  .firework {
+    @apply absolute rounded-full;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.8);
+    animation: firework-animation var(--duration) ease-out forwards;
+  }
+  
+  @keyframes firework-animation {
+    0% {
+      transform: translate(var(--x), var(--y)) scale(0);
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(
+        calc(var(--x) + var(--spread) * cos(var(--angle))),
+        calc(var(--y) + var(--spread) * sin(var(--angle)) + 100px)
+      ) scale(0.1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+}
